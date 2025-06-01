@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 # Create your models here.
 class Post(models.Model):
@@ -15,3 +16,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return f'/blog/{self.pk}/' #문자열 포맷팅f
+
+    def get_file_name(self):
+        return os.path.basename(self.file_upload.name)
+
+    def get_file_ext(self): #확장자 찾기
+        return self.get_file_name().split('.')[-1] #-1은 마지막 요소 ex) jpg
